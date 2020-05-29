@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
+import FormAddFood from './FormAddFood';
 
 const FoodBox = (props) => {
   const allFoods = props.food;
   const [food, setFood] = useState(allFoods);
+
+  const createFoodHandler = (newFood) => {
+    const foodsCopy = [...food];
+    console.log(foodsCopy);
+    foodsCopy.push(newFood);
+    setFood([...foodsCopy]);
+    console.log(foodsCopy);
+  };
   return (
     <div>
+      <FormAddFood {...food} addFoods={(e) => createFoodHandler(e)} />
       {food.map((eachFood, index) => (
         <div className="column is-half" key={index}>
           <article className="media">
@@ -32,6 +42,7 @@ const FoodBox = (props) => {
                 </div>
               </div>
             </div>
+            <div className="media-right"></div>
           </article>
         </div>
       ))}
